@@ -1,38 +1,24 @@
-# XueDAO - CONNECT Hackathon: XueToken Workshop
+# XueDAO - CONNECT Hackathon: XueNFT Workshop
 
-XueDAO is excited to present the **CONNECT Hackathon**, featuring a comprehensive Solidity workshop designed to provide
-participants with hands-on experience in blockchain technology and smart contract development. As part of this workshop,
-we will guide you through the creation and deployment of an ERC-20 token, aptly named **XueToken**.
+XueDAO is excited to present the **CONNECT Hackathon**, featuring a comprehensive Solidity workshop designed to provide participants with hands-on experience in blockchain technology and smart contract development. As part of this workshop, we will guide you through the creation and deployment of an ERC-721 token, aptly named **XueNFT**.
 
 ## Workshop Overview
 
-Participants in the workshop will have the opportunity to design, develop, and test XueToken, an ERC-20 compliant token.
-The project is structured into three main parts, each focusing on a critical aspect of token functionality. To ensure a
-comprehensive understanding, participants must complete the following steps and pass the associated unit tests.
+Participants in the workshop will have the opportunity to design, develop, and test XueNFT, an ERC-721 compliant token. The project is structured into three main parts, each focusing on a critical aspect of token functionality. To ensure a comprehensive understanding, participants must complete the following steps and pass the associated unit tests.
 
 ## Tasks and Unit Tests
 
-### 1. Implement Basic Token Transfer
+### 1. Implement Approve Function
 
-Develop the core functionality to enable token transfers between addresses.
-
-**Unit Test Command:**
-
-```bash
-forge test --mt test_CheckTransferPoints -vvv
-```
-
-### 2. Implement Token Approval
-
-Enable address owners to approve third parties to spend tokens on their behalf.
+Enable address owners to approve third parties to manage specific tokens on their behalf.
 
 **Unit Test Command:**
 
 ```bash
-forge test --mt test_CheckApprovePoints -vvv
+forge test --mt test_CheckApproveRelatedPoints -vvv
 ```
 
-### 3. Implement TransferFrom Functionality
+### 2. Implement TransferFrom Functionality
 
 Allow third parties to transfer tokens on behalf of the address owners, within the approved limits.
 
@@ -42,18 +28,39 @@ Allow third parties to transfer tokens on behalf of the address owners, within t
 forge test --mt test_CheckTransferFromPoints -vvv
 ```
 
-## Smart Contract Location
+### 3. Implement SafeTransferFrom Functionality
 
-The smart contract for XueToken is located in the following directory:
+Ensure safe transfer of tokens, checking if the receiver is capable of handling ERC-721 tokens.
+
+**Unit Test Command:**
 
 ```bash
-./src/XueToken.sol
+forge test --mt test_CheckSafeTransferFromPoints -vvv
+```
+
+### 4. Deploy to Sepolia Testnet
+```bash
+forge script script/Deploy.s.sol:Deploy \
+  --rpc-url $SEPOLIA_RPC \
+  --private-key $PRIVATE_KEY \
+  --verifier-url $VERIFIER_URL \
+  --broadcast \
+  --sig "run()" \
+  -vvv
+```
+
+## Smart Contract Location
+
+The smart contract for XueNFT is located in the following directory:
+
+```bash
+./src/XueNFT.sol
 ```
 
 Unit tests are available in:
 
 ```bash
-./test/XueToken.t.sol
+./test/XueNFT.t.sol
 ```
 
 ## Usage
