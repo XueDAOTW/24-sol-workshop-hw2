@@ -278,16 +278,26 @@ contract XueNFTTest is Test {
     }
 
     function test_CheckTransferFromPoints() public {
-        if (
-            test_TransferFrom() && test_TransferFrom_RevertWhen_ZeroAddress() && test_TransferFrom_RevertWhen_NotOwner()
-        ) {
-            console2.log("Get 30 points");
+        if (test_TransferFrom()) {
+            _resetState();
+            if (test_TransferFrom_RevertWhen_ZeroAddress()) {
+                _resetState();
+                if (test_TransferFrom_RevertWhen_NotOwner()) {
+                    console2.log("Get 30 points");
+                }
+            }
         }
     }
 
     function test_CheckSafeTransferFromPoints() public {
-        if (test_SafeTransferFrom_EOA() && test_SafeTransferFrom_CA_Failure() && test_SafeTransferFrom_CA_Success()) {
-            console2.log("Get 40 points");
+        if (test_SafeTransferFrom_EOA()) {
+            _resetState();
+            if (test_SafeTransferFrom_CA_Failure()) {
+                _resetState();
+                if (test_SafeTransferFrom_CA_Success()) {
+                    console2.log("Get 40 points");
+                }
+            }
         }
     }
 
